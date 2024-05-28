@@ -108,12 +108,9 @@ public class GuoChanFragment extends BaseFragment {
 
     public void initBanner() {
         List<Integer> imageList = new ArrayList<>();
-        imageList.add(R.drawable.duxin);
-        imageList.add(R.drawable.kenan);
-        imageList.add(R.drawable.huge);
-        imageList.add(R.drawable.kuangbiao);
-        imageList.add(R.drawable.korea);
-        imageList.add(R.drawable.meiju);
+        imageList.add(R.drawable.guochan1);
+        imageList.add(R.drawable.guochan2);
+        imageList.add(R.drawable.guochan3);
         banner.setAdapter(new BannerImageAdapter<Integer>(imageList) {
                     @Override
                     public void onBindView(BannerImageHolder holder, Integer resourceId, int position, int size) {
