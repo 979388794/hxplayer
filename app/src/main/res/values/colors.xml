@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="blue">#0C80DC</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorConfirm" >#0C80DC</color>
+
+    <color name="uvv_gray">#969696</color>
+    <color name="uvv_black">#ff000000</color>
+    <color name="uvv_light_gray">#ffF0F0F0</color>
+    <color name="uvv_titlebar_bg">#7f000000</color>
+    <color name="tab_text_selected">#FFC107</color>
+    <color name="tab_text_unselected">#100F0F</color>
+
+</resources>
