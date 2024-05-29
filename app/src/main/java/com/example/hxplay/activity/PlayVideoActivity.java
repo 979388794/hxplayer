@@ -52,18 +52,16 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class PlayVideoActivity extends AppCompatActivity implements SubViewAdapter.OnItemClickListener {
-
+public class PlayVideoActivity extends AppCompatActivity {
+    String TAG = this.getClass().getSimpleName();
     DemoQSVideoView demoVideoView;
     DanmakuControl danmakuControl;
     DramaView mMyview;
     String[] arr = {"适应", "填充", "原尺寸", "拉伸", "16:9", "4:3"};
-    String m3u8 = "https://v.gsuus.com/play/PdRDArLa/index.m3u8";
-    //    String m3u8;
+    String m3u8;
     String url;
     Class<? extends BaseMedia> decodeMedia;
     String videoId;
-    String TAG = this.getClass().getSimpleName();
     public OkHttpClient client;
     List<VideoDetailsBean.Data.Chapter> chapters;
 
@@ -78,11 +76,7 @@ public class PlayVideoActivity extends AppCompatActivity implements SubViewAdapt
 
         Log.d(TAG, "videoId-----=" + videoId.toString());
         getdata(videoId);
-
-
         mMyview = (DramaView) findViewById(R.id.Drama_series);
-
-
 
         demoVideoView = findViewById(R.id.qs);
         demoVideoView.getCoverImageView().setImageResource(R.mipmap.cover);
@@ -121,7 +115,6 @@ public class PlayVideoActivity extends AppCompatActivity implements SubViewAdapt
                 DanmakuConfig.getDefaultContext()
         );
         danmakuControl.hide();
-        play(m3u8, AndroidMedia.class);
     }
 
 
@@ -354,9 +347,20 @@ public class PlayVideoActivity extends AppCompatActivity implements SubViewAdapt
                         public void run() {
                             if (chapters != null && chapters.size() >= 1) {
                                 Log.d(TAG, "chapters =" + chapters);
-                                m3u8 = chapters.get(1).getChapterPath();
+                                m3u8 = chapters.get(0).getChapterPath();
                                 DramaViewAdapter adapter = new DramaViewAdapter(chapters.size());
                                 mMyview.setAdapter(adapter);
+                                adapter.getSubViewAdapter().setOnItemClickListener(new SubViewAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onSubItemClick(View view, int position) {
+                                        Log.d(TAG, "点击位置为" + position);
+                                        if (chapters.size() >= 1) {
+                                            play(chapters.get(position).getChapterPath(), AndroidMedia.class);
+                                        } else {
+                                            Log.d(TAG, "chapters只有一个" + position);
+                                        }
+                                    }
+                                });
                             }
                         }
                     }, 300);
@@ -366,14 +370,6 @@ public class PlayVideoActivity extends AppCompatActivity implements SubViewAdapt
         });
 
     }
-
-    @Override
-    public void onSubItemClick(View view, int position) {
-
-    }
-
-
-
 
 
 }

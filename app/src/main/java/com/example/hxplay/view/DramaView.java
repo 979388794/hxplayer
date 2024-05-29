@@ -91,7 +91,7 @@ public class DramaView extends RelativeLayout {
         msubAdapter.setOnItemClickListener(new SubViewAdapter.OnItemClickListener() {
             @Override
             public void onSubItemClick(View view, int position) {
-//                Log.d(TAG, "  " + position);
+                Log.d(TAG, "  " + position);
             }
         });
 
