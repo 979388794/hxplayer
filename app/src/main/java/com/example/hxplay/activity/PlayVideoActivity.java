@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,10 +66,18 @@ public class PlayVideoActivity extends AppCompatActivity {
     public OkHttpClient client;
     List<VideoDetailsBean.Data.Chapter> chapters;
 
+    ImageView cover;
+    TextView title;
+    TextView actor;
+    TextView descs;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_view);
+
+
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
         SSLHelper.configureSSL(okBuilder);
         client = okBuilder.build();
@@ -78,8 +87,12 @@ public class PlayVideoActivity extends AppCompatActivity {
         getdata(videoId);
         mMyview = (DramaView) findViewById(R.id.Drama_series);
 
+        cover = findViewById(R.id.cover);
+        title = findViewById(R.id.title);
+        actor = findViewById(R.id.actor);
+        descs = findViewById(R.id.descs);
         demoVideoView = findViewById(R.id.qs);
-        demoVideoView.getCoverImageView().setImageResource(R.mipmap.cover);
+        demoVideoView.getCoverImageView().setImageResource(R.drawable.dongman1);
         demoVideoView.setLayoutParams(new LinearLayout.LayoutParams(-1, getResources().getDisplayMetrics().widthPixels * 9 / 16));
         //进入全屏的模式 0横屏 1竖屏 2传感器自动横竖屏 3根据视频比例自动确定横竖屏      -1什么都不做
         demoVideoView.enterFullMode = 3;
@@ -350,6 +363,16 @@ public class PlayVideoActivity extends AppCompatActivity {
                                 m3u8 = chapters.get(0).getChapterPath();
                                 DramaViewAdapter adapter = new DramaViewAdapter(chapters.size());
                                 mMyview.setAdapter(adapter);
+
+                            //todo 导致封面异常
+//                                Glide.with(cover).load(movieBean.getData().getCover())
+//                                        .fitCenter()
+//                                        .centerCrop()
+//                                        .into(cover);
+                                title.setText(movieBean.getData().getTitle());
+                                actor.setText(movieBean.getData().getActor());
+                                descs.setText(movieBean.getData().getDescs());
+
                                 adapter.getSubViewAdapter().setOnItemClickListener(new SubViewAdapter.OnItemClickListener() {
                                     @Override
                                     public void onSubItemClick(View view, int position) {
