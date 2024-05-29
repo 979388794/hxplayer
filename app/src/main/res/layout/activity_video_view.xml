@@ -40,11 +40,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="10sp" />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="m3u8直播"
-                    android:text="m3u8直播" />
+
 
             </LinearLayout>
 

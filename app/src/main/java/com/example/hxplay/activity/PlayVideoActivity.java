@@ -139,9 +139,9 @@ public class PlayVideoActivity extends AppCompatActivity {
     }
 
 
-    public void m3u8直播(View v) {
-        play(m3u8, decodeMedia);
-    }
+//    public void m3u8直播(View v) {
+//        play(m3u8, decodeMedia);
+//    }
 
 
     int mode;
