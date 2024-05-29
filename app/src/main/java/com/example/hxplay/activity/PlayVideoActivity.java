@@ -326,7 +326,6 @@ public class PlayVideoActivity extends AppCompatActivity implements SubViewAdapt
         );
     }
 
-
     public void getdata(String videoId) {
         Log.d(TAG, "getdata-----");
         Request request = new Request.Builder()
