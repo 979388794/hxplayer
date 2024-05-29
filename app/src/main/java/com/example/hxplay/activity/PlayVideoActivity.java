@@ -1,4 +1,4 @@
-package com.example.hxplay.video.activity;
+package com.example.hxplay.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.example.hxplay.R;
+import com.example.hxplay.adapter.DramaViewAdapter;
+import com.example.hxplay.adapter.SubViewAdapter;
 import com.example.hxplay.bean.VideoDetailsBean;
 import com.example.hxplay.utils.API;
 import com.example.hxplay.utils.SSLHelper;
@@ -27,6 +29,7 @@ import com.example.hxplay.video.danmaku.DanmakuConfig;
 import com.example.hxplay.video.danmaku.DanmakuControl;
 import com.example.hxplay.video.danmaku.QSDanmakuParser;
 import com.example.hxplay.video.io.FileUtil;
+import com.example.hxplay.view.DramaView;
 import com.google.gson.Gson;
 
 import org.song.videoplayer.DemoQSVideoView;
@@ -49,13 +52,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class PlayVideoActivity extends AppCompatActivity {
+public class PlayVideoActivity extends AppCompatActivity implements SubViewAdapter.OnItemClickListener {
 
     DemoQSVideoView demoVideoView;
     DanmakuControl danmakuControl;
+    DramaView mMyview;
     String[] arr = {"适应", "填充", "原尺寸", "拉伸", "16:9", "4:3"};
-        String m3u8 = "https://v.gsuus.com/play/PdRDArLa/index.m3u8";
-//    String m3u8;
+    String m3u8 = "https://v.gsuus.com/play/PdRDArLa/index.m3u8";
+    //    String m3u8;
     String url;
     Class<? extends BaseMedia> decodeMedia;
     String videoId;
@@ -74,6 +78,12 @@ public class PlayVideoActivity extends AppCompatActivity {
 
         Log.d(TAG, "videoId-----=" + videoId.toString());
         getdata(videoId);
+
+
+        mMyview = (DramaView) findViewById(R.id.Drama_series);
+
+
+
         demoVideoView = findViewById(R.id.qs);
         demoVideoView.getCoverImageView().setImageResource(R.mipmap.cover);
         demoVideoView.setLayoutParams(new LinearLayout.LayoutParams(-1, getResources().getDisplayMetrics().widthPixels * 9 / 16));
@@ -82,7 +92,6 @@ public class PlayVideoActivity extends AppCompatActivity {
         //是否非全屏下也可以手势调节进度
         demoVideoView.isWindowGesture = true;
         demoVideoView.setPlayListener(new PlayListener() {
-
             int mode;
 
             @Override
@@ -347,6 +356,8 @@ public class PlayVideoActivity extends AppCompatActivity {
                             if (chapters != null && chapters.size() >= 1) {
                                 Log.d(TAG, "chapters =" + chapters);
                                 m3u8 = chapters.get(1).getChapterPath();
+                                DramaViewAdapter adapter = new DramaViewAdapter(chapters.size());
+                                mMyview.setAdapter(adapter);
                             }
                         }
                     }, 300);
@@ -356,6 +367,14 @@ public class PlayVideoActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onSubItemClick(View view, int position) {
+
+    }
+
+
+
 
 
 }

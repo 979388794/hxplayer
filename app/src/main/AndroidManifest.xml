@@ -28,7 +28,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="com.example.hxplay.video.activity.PlayVideoActivity"
+            android:name="com.example.hxplay.activity.PlayVideoActivity"
             android:exported="false">
         </activity>
         <activity

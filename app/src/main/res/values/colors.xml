@@ -13,5 +13,6 @@
     <color name="uvv_titlebar_bg">#7f000000</color>
     <color name="tab_text_selected">#FFC107</color>
     <color name="tab_text_unselected">#100F0F</color>
+    <color name="black">#000000</color>
 
 </resources>

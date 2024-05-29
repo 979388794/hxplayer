@@ -16,7 +16,7 @@ import com.example.hxplay.adapter.MovieAdapter;
 import com.example.hxplay.bean.VideoBean;
 import com.example.hxplay.glide.GlideApp;
 import com.example.hxplay.utils.API;
-import com.example.hxplay.video.activity.PlayVideoActivity;
+import com.example.hxplay.activity.PlayVideoActivity;
 import com.example.hxplay.view.MyGridLayoutManager;
 import com.example.hxplay.view.MyRecyclerView;
 import com.google.gson.Gson;
