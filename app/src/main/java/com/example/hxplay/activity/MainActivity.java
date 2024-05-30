@@ -1,43 +1,50 @@
 package com.example.hxplay.activity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.hxplay.R;
-import com.example.hxplay.fragment.HomeFragment;
 import com.example.hxplay.fragment.CategoryFragment;
+import com.example.hxplay.fragment.HomeFragment;
 import com.example.hxplay.fragment.UserFragment;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     private MyFragmentPagerAdapter adapter;
     //未选中的Tab图片
     private int[] unSelectTabRes = new int[]{R.mipmap.main_home, R.mipmap.category, R.mipmap.main_user};
     //选中的Tab图片
-    private int[] selectTabRes = new int[]{R.mipmap.main_home_press, R.mipmap.category_select,  R.mipmap.main_user_press};
+    private int[] selectTabRes = new int[]{R.mipmap.main_home_press, R.mipmap.category_select, R.mipmap.main_user_press};
     //Tab标题
     private String[] title = {"首页", "分类", "我的"};
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    DrawerLayout mDrawerLayout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDrawerLayout = findViewById(R.id.home_drawerlayout);
         initView();
         initListener();
     }
+
 
     private void initView() {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -47,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         //将TabLayout与ViewPager绑定
         tabLayout.setupWithViewPager(viewPager);
-
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(adapter.getView(i));
         }
     }
+
 
     private void initListener() {
         //TabLayout切换时导航栏图片处理
@@ -68,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     imageView.setImageResource(selectTabRes[0]);
                 } else if (title.equals("分类")) {
                     imageView.setImageResource(selectTabRes[1]);
-                }  else if (title.equals("我的")) {
+                } else if (title.equals("我的")) {
                     imageView.setImageResource(selectTabRes[2]);
                 }
             }
@@ -84,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     imageView.setImageResource(unSelectTabRes[0]);
                 } else if (title.equals("分类")) {
                     imageView.setImageResource(unSelectTabRes[1]);
-                }  else if (title.equals("我的")) {
+                } else if (title.equals("我的")) {
                     imageView.setImageResource(unSelectTabRes[2]);
                 }
             }
@@ -96,6 +103,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            // Handle the camera action
+        } else if (id == R.id.nav_download) {
+
+        } else if (id == R.id.nav_start) {
+
+        } else if (id == R.id.nav_history) {
+
+        } else if (id == R.id.nav_people) {
+
+        } else if (id == R.id.nav_shop) {
+
+        } else if (id == R.id.nav_color) {
+
+        } else if (id == R.id.nav_app) {
+
+        } else if (id == R.id.nav_settings) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.home_drawerlayout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
     //自定义适配器
     public class MyFragmentPagerAdapter extends FragmentPagerAdapter {

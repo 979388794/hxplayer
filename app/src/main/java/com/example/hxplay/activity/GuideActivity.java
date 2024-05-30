@@ -21,8 +21,7 @@ import com.example.hxplay.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class
-GuideActivity extends AppCompatActivity {
+public class GuideActivity extends AppCompatActivity {
 
     private int[] images = {R.drawable.l1, R.drawable.l2, R.drawable.l3, R.drawable.l4};
     private List<ImageView> imageViews;
@@ -50,15 +49,16 @@ GuideActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageSelected(int position) {
-                for (int i=0;i<dotViews.length;i++){
-                    if (position==i) {
+                for (int i = 0; i < dotViews.length; i++) {
+                    if (position == i) {
                         dotViews[i].setImageResource(R.drawable.guide_red_circle);
                     } else {
                         dotViews[i].setImageResource(R.drawable.guide_gray_circle);
                     }
-                    if (position==dotViews.length-1) {
+                    if (position == dotViews.length - 1) {
                         guide_btn.setVisibility(View.VISIBLE);
                     } else {
                         guide_btn.setVisibility(View.GONE);
@@ -75,10 +75,10 @@ GuideActivity extends AppCompatActivity {
         guide_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = getSharedPreferences("data",MODE_PRIVATE).edit();
-                editor.putString("isFirst","1");
+                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                editor.putString("isFirst", "1");
                 editor.commit();
-                Intent intent = new Intent(GuideActivity.this,MainActivity.class);
+                Intent intent = new Intent(GuideActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -111,13 +111,13 @@ GuideActivity extends AppCompatActivity {
 
     public void initDots() {
         LinearLayout guide_ll = findViewById(R.id.guide_ll);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20,20);
-        params.setMargins(10,0,10,0);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20, 20);
+        params.setMargins(10, 0, 10, 0);
         dotViews = new ImageView[images.length];
-        for (int i=0;i<imageViews.size();i++){
+        for (int i = 0; i < imageViews.size(); i++) {
             ImageView imageView = new ImageView(this);
             imageView.setLayoutParams(params);
-            if (i==0) {
+            if (i == 0) {
                 imageView.setImageResource(R.drawable.guide_red_circle);
             } else {
                 imageView.setImageResource(R.drawable.guide_gray_circle);

@@ -14,5 +14,7 @@
     <color name="tab_text_selected">#FFC107</color>
     <color name="tab_text_unselected">#100F0F</color>
     <color name="black">#000000</color>
+    <color name="bili_color_pink">#FB7299</color>
+    <color name="white_normal">#99ffffff</color>
 
 </resources>
