@@ -94,11 +94,11 @@ public class PlayVideoActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
         actor = findViewById(R.id.actor);
         descs = findViewById(R.id.descs);
-        videotype= findViewById(R.id.videotype);
-        region= findViewById(R.id.region);
+        videotype = findViewById(R.id.videotype);
+        region = findViewById(R.id.region);
         demoVideoView = findViewById(R.id.qs);
-        shuhao= findViewById(R.id.shuhao);
-        zhuyan= findViewById(R.id.zhuyan);
+        shuhao = findViewById(R.id.shuhao);
+        zhuyan = findViewById(R.id.zhuyan);
         demoVideoView.getCoverImageView().setImageResource(R.drawable.dongman1);
         demoVideoView.setLayoutParams(new LinearLayout.LayoutParams(-1, getResources().getDisplayMetrics().widthPixels * 9 / 16));
         //进入全屏的模式 0横屏 1竖屏 2传感器自动横竖屏 3根据视频比例自动确定横竖屏      -1什么都不做
@@ -371,7 +371,7 @@ public class PlayVideoActivity extends AppCompatActivity {
                                 DramaViewAdapter adapter = new DramaViewAdapter(chapters.size());
                                 mMyview.setAdapter(adapter);
 
-                            //todo 导致封面异常
+                                //todo 导致封面异常
 //                                Glide.with(cover).load(movieBean.getData().getCover())
 //                                        .fitCenter()
 //                                        .centerCrop()
@@ -379,7 +379,12 @@ public class PlayVideoActivity extends AppCompatActivity {
                                 title.setText(movieBean.getData().getTitle());
                                 actor.setText(movieBean.getData().getActor());
                                 descs.setText(movieBean.getData().getDescs());
-                                videotype.setText(movieBean.getData().getVideoType());
+                                String str = movieBean.getData().getVideoType();
+                                if (str.endsWith(",")) {
+                                    // 如果字符串以逗号结尾，则去掉最后一个逗号
+                                    str = str.substring(0, str.lastIndexOf(","));
+                                }
+                                videotype.setText(str);
                                 region.setText(movieBean.getData().getRegion());
                                 zhuyan.setVisibility(View.VISIBLE);
                                 shuhao.setVisibility(View.VISIBLE);
