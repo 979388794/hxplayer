@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,6 +19,7 @@
             android:background="@color/orange" />
 
         <RelativeLayout
+            android:id="@+id/xiangqing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -28,55 +30,107 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:text="简介"
+                android:text="详情"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/cover"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview"
+                android:layout_width="120dp"
+                android:layout_height="140dp"
                 android:layout_below="@+id/jianjie"
-                android:layout_alignStart="@+id/jianjie" />
+                android:layout_alignStart="@+id/jianjie"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:id="@+id/cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jianjie"
-                android:layout_marginStart="50dp"
-                android:layout_toRightOf="@+id/cover"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/cardview"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/videotype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:layout_alignStart="@+id/title"
+                android:layout_marginTop="40dp"
                 android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/shuhao"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/videotype"
+                android:layout_toRightOf="@+id/videotype"
+                android:text="|" />
+
+            <TextView
+                android:id="@+id/region"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/videotype"
+                android:layout_toRightOf="@+id/shuhao"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/zhuyan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/videotype"
+                android:layout_alignStart="@+id/title"
+                android:layout_marginTop="2dp"
+                android:text="主演："
+                android:visibility="gone"
+                android:textSize="14sp" />
+
 
             <TextView
                 android:id="@+id/actor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@+id/cover"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/descs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/actor"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@+id/cover"
-                android:ellipsize="end"
-                android:maxLines="5"
+                android:layout_below="@+id/zhuyan"
+                android:layout_alignStart="@+id/title"
+                android:layout_marginTop="2dp"
                 android:textSize="14sp" />
         </RelativeLayout>
+
+        <View
+            android:background="@drawable/grey"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <TextView
+            android:id="@+id/descs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/episode_title"
             android:textColor="@color/black"
             android:textSize="20sp"

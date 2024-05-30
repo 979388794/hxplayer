@@ -70,7 +70,10 @@ public class PlayVideoActivity extends AppCompatActivity {
     TextView title;
     TextView actor;
     TextView descs;
-
+    TextView videotype;
+    TextView region;
+    TextView shuhao;
+    TextView zhuyan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,11 @@ public class PlayVideoActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
         actor = findViewById(R.id.actor);
         descs = findViewById(R.id.descs);
+        videotype= findViewById(R.id.videotype);
+        region= findViewById(R.id.region);
         demoVideoView = findViewById(R.id.qs);
+        shuhao= findViewById(R.id.shuhao);
+        zhuyan= findViewById(R.id.zhuyan);
         demoVideoView.getCoverImageView().setImageResource(R.drawable.dongman1);
         demoVideoView.setLayoutParams(new LinearLayout.LayoutParams(-1, getResources().getDisplayMetrics().widthPixels * 9 / 16));
         //进入全屏的模式 0横屏 1竖屏 2传感器自动横竖屏 3根据视频比例自动确定横竖屏      -1什么都不做
@@ -372,7 +379,10 @@ public class PlayVideoActivity extends AppCompatActivity {
                                 title.setText(movieBean.getData().getTitle());
                                 actor.setText(movieBean.getData().getActor());
                                 descs.setText(movieBean.getData().getDescs());
-
+                                videotype.setText(movieBean.getData().getVideoType());
+                                region.setText(movieBean.getData().getRegion());
+                                zhuyan.setVisibility(View.VISIBLE);
+                                shuhao.setVisibility(View.VISIBLE);
                                 adapter.getSubViewAdapter().setOnItemClickListener(new SubViewAdapter.OnItemClickListener() {
                                     @Override
                                     public void onSubItemClick(View view, int position) {

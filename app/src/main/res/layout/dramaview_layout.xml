@@ -2,20 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/contentPanel"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusable="true">
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subset"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"/>
+        android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/parentset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/subset"
-        android:layout_marginTop="10dp"
-        android:focusable="true"/>
+        android:layout_marginTop="10dp" />
 </RelativeLayout>
