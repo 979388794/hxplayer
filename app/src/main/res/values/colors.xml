@@ -16,5 +16,6 @@
     <color name="black">#000000</color>
     <color name="bili_color_pink">#FB7299</color>
     <color name="white_normal">#99ffffff</color>
+    <color name="red">#ED6258</color>
 
 </resources>

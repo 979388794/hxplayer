@@ -4,29 +4,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="185dp"
-    android:background="@color/bili_color_pink"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingTop="41dp">
+    android:background="@color/red"
+    android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true">
 
         <ImageView
+
             android:id="@+id/leftmenu_iv_drawerbg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bili_drawerbg_not_logined"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/author_background"/>
     </FrameLayout>
 
     <ImageView
+        android:layout_marginTop="41dp"
+        android:layout_marginStart="16dp"
         android:id="@+id/leftmenu_iv_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/bili_default_avatar"/>
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/author_round" />
 
     <ImageView
         android:layout_marginRight="16dp"
@@ -38,6 +40,8 @@
         android:src="@drawable/ic_switch_night"/>
 
     <TextView
+
+        android:layout_marginStart="16dp"
         android:paddingTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
