@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.hxplay.R;
 import com.example.hxplay.fragment.HomeFragment;
-import com.example.hxplay.fragment.JianDangFragment;
+import com.example.hxplay.fragment.CategoryFragment;
 import com.example.hxplay.fragment.UserFragment;
 import com.google.android.material.tabs.TabLayout;
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             if (position == 0) {
                 return new HomeFragment();
             } else if (position == 1) {
-                return new JianDangFragment();
+                return new CategoryFragment();
             } else if (position == 2) {
                 return new UserFragment();
             }
