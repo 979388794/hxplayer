@@ -79,8 +79,6 @@ public class PlayVideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_view);
-
-
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
         SSLHelper.configureSSL(okBuilder);
         client = okBuilder.build();
