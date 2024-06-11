@@ -27,14 +27,14 @@
             android:exported="false"></activity>
         <activity
             android:name="com.example.hxplay.video.VideoviewActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity android:name="com.example.hxplay.activity.RegisterActivity" />
         <activity android:name="com.example.hxplay.activity.LoginActivity" />
         <activity android:name="com.example.hxplay.activity.GuideActivity" />
         <activity
             android:name="com.example.hxplay.activity.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -44,8 +44,7 @@
 
         <activity
             android:name="com.example.hxplay.activity.MainActivity"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible|adjustPan"></activity>
 
 
         <meta-data
