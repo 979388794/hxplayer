@@ -33,8 +33,7 @@
         <activity android:name="com.example.hxplay.activity.GuideActivity" />
         <activity
             android:name="com.example.hxplay.activity.SplashActivity"
-            android:exported="true"
-            android:launchMode="singleTask">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -44,6 +43,7 @@
 
         <activity
             android:name="com.example.hxplay.activity.MainActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="stateAlwaysVisible|adjustPan"></activity>
 
 

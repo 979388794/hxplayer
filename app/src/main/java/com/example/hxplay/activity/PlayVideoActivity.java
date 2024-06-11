@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.example.hxplay.R;
 import com.example.hxplay.adapter.DramaViewAdapter;
@@ -88,7 +89,7 @@ public class PlayVideoActivity extends AppCompatActivity {
         getdata(videoId);
         mMyview = (DramaView) findViewById(R.id.Drama_series);
 
-        cover = findViewById(R.id.cover);
+        cover = findViewById(R.id.cover_view);
         title = findViewById(R.id.title);
         actor = findViewById(R.id.actor);
         descs = findViewById(R.id.descs);
@@ -370,10 +371,10 @@ public class PlayVideoActivity extends AppCompatActivity {
                                 mMyview.setAdapter(adapter);
 
                                 //todo 导致封面异常
-//                                Glide.with(cover).load(movieBean.getData().getCover())
-//                                        .fitCenter()
-//                                        .centerCrop()
-//                                        .into(cover);
+                                Glide.with(cover).load(movieBean.getData().getCover())
+                                        .fitCenter()
+                                        .centerCrop()
+                                        .into(cover);
                                 title.setText(movieBean.getData().getTitle());
                                 actor.setText(movieBean.getData().getActor());
                                 descs.setText(movieBean.getData().getDescs());
