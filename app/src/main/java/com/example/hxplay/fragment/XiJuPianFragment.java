@@ -55,21 +55,21 @@ public class XiJuPianFragment extends BaseFragment{
     }
 
 
-    @Override
-    public View initView() {
-        Log.d(TAG, "onCreateView-----");
-        if (rootview == null) {
-            Log.d(TAG, "onCreateView--------rootview为null");
-            rootview = View.inflate(getContext(), R.layout.fragment_main, null);
-            banner = rootview.findViewById(R.id.banner);
-            recyclerView = rootview.findViewById(R.id.recyclerview);
-            //启用嵌套滚动
-            recyclerView.setNestedScrollingEnabled(false);
-            recyclerView.setFocusableInTouchMode(false);
-            recyclerView.setflingScale(3.0); // 设置速度缩放因子为2.0，使滑动速度变快一倍
-        }
-        return rootview;
-    }
+//    @Override
+//    public View initView() {
+//        Log.d(TAG, "onCreateView-----");
+//        if (rootview == null) {
+//            Log.d(TAG, "onCreateView--------rootview为null");
+//            rootview = View.inflate(getContext(), R.layout.fragment_main, null);
+//            banner = rootview.findViewById(R.id.banner);
+//            recyclerView = rootview.findViewById(R.id.recyclerview);
+//            //启用嵌套滚动
+//            recyclerView.setNestedScrollingEnabled(false);
+//            recyclerView.setFocusableInTouchMode(false);
+//            recyclerView.setflingScale(3.0); // 设置速度缩放因子为2.0，使滑动速度变快一倍
+//        }
+//        return rootview;
+//    }
     @Override
     public void onResume() {
         super.onResume();

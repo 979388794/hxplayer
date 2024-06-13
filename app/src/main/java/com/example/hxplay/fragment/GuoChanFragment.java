@@ -18,7 +18,6 @@ import com.example.hxplay.bean.VideoBean;
 import com.example.hxplay.glide.GlideApp;
 import com.example.hxplay.utils.API;
 import com.example.hxplay.view.MyGridLayoutManager;
-import com.example.hxplay.view.MyRecyclerView;
 import com.google.gson.Gson;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
@@ -44,7 +43,7 @@ public class GuoChanFragment extends BaseFragment {
     private Banner banner;
     private Context mContext;
     View rootview;
-    MyRecyclerView recyclerView;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,21 +52,21 @@ public class GuoChanFragment extends BaseFragment {
     }
 
 
-    @Override
-    public View initView() {
-        Log.d(TAG, "onCreateView-----");
-        if (rootview == null) {
-            Log.d(TAG, "onCreateView--------rootview为null");
-            rootview = View.inflate(getContext(), R.layout.fragment_main, null);
-            banner = rootview.findViewById(R.id.banner);
-            recyclerView = rootview.findViewById(R.id.recyclerview);
-            //启用嵌套滚动
-            recyclerView.setNestedScrollingEnabled(false);
-            recyclerView.setFocusableInTouchMode(false);
-            recyclerView.setflingScale(3.0); // 设置速度缩放因子为2.0，使滑动速度变快一倍
-        }
-        return rootview;
-    }
+//    @Override
+//    public View initView() {
+//        Log.d(TAG, "onCreateView-----");
+//        if (rootview == null) {
+//            Log.d(TAG, "onCreateView--------rootview为null");
+//            rootview = View.inflate(getContext(), R.layout.fragment_main, null);
+//            banner = rootview.findViewById(R.id.banner);
+//            recyclerView = rootview.findViewById(R.id.recyclerview);
+//            //启用嵌套滚动
+//            recyclerView.setNestedScrollingEnabled(false);
+//            recyclerView.setFocusableInTouchMode(false);
+//            recyclerView.setflingScale(3.0); // 设置速度缩放因子为2.0，使滑动速度变快一倍
+//        }
+//        return rootview;
+//    }
 
 
     @Override

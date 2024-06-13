@@ -66,4 +66,10 @@ dependencies {
     api project(':mylibrary')
     //RecyclerView最好的适配器，让你的适配器一目了然，告别代码冗余
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+
+    //recyclerview 上拉刷新下拉加载更多
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'
+
+
 }

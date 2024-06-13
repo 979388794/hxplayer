@@ -2,10 +2,14 @@ package com.example.hxplay.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -27,8 +31,10 @@ public class UserFragment extends BaseFragment {
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
 
+
+    @Nullable
     @Override
-    public View initView() {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(getContext(), R.layout.fragment_user, null);
         ivBg = view.findViewById(R.id.iv_bg);
         collapsingToolbarLayout = view.findViewById(R.id.toolbar_layout);
@@ -37,6 +43,7 @@ public class UserFragment extends BaseFragment {
         viewPager = view.findViewById(R.id.view_pager);
         return view;
     }
+
 
 
     @Override

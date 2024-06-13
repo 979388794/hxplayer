@@ -2,10 +2,14 @@ package com.example.hxplay.fragment;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -24,14 +28,23 @@ public class HomeFragment extends BaseFragment {
     String[] title = {"国产剧", "综艺", "日韩动漫", "喜剧片", "爱情片", "纪录片", "欧美剧", "韩剧"};
     private ViewPageAdapter newTabAdapter;
 
+//    @Override
+//    public View initView() {
+//        View view = View.inflate(getContext(), R.layout.fragment_home, null);
+//        viewPager = view.findViewById(R.id.view_pager);
+//        tab_layout = view.findViewById(R.id.tab_layout);
+//        return view;
+//    }
+
+
+    @Nullable
     @Override
-    public View initView() {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(getContext(), R.layout.fragment_home, null);
         viewPager = view.findViewById(R.id.view_pager);
         tab_layout = view.findViewById(R.id.tab_layout);
         return view;
     }
-
 
     @Override
     public void initData() {

@@ -20,6 +20,10 @@ import com.example.hxplay.utils.API;
 import com.example.hxplay.view.MyGridLayoutManager;
 import com.example.hxplay.view.MyRecyclerView;
 import com.google.gson.Gson;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
@@ -46,6 +50,8 @@ public class AiQingPianFragment extends BaseFragment {
     private Context mContext;
     View rootview;
     MyRecyclerView recyclerView;
+    RefreshLayout refreshLayout;
+    int number = 1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,30 +59,44 @@ public class AiQingPianFragment extends BaseFragment {
         mContext = getContext();
     }
 
-    @Override
-    public View initView() {
-        Log.d(TAG, "onCreateView-----");
-        if (rootview == null) {
-            Log.d(TAG, "onCreateView--------rootview为null");
-            rootview = View.inflate(getContext(), R.layout.fragment_main, null);
-            banner = rootview.findViewById(R.id.banner);
-            recyclerView = rootview.findViewById(R.id.recyclerview);
-            //启用嵌套滚动
-            recyclerView.setNestedScrollingEnabled(false);
-            recyclerView.setFocusableInTouchMode(false);
-            recyclerView.setflingScale(3.0); // 设置速度缩放因子为2.0，使滑动速度变快一倍
-        }
-        return rootview;
-    }
+//    @Override
+//    public View initView() {
+//        Log.d(TAG, "onCreateView-----");
+//        if (rootview == null) {
+//            Log.d(TAG, "onCreateView--------rootview为null");
+//            rootview = View.inflate(getContext(), R.layout.fragment_main, null);
+//            banner = rootview.findViewById(R.id.banner);
+//            recyclerView = rootview.findViewById(R.id.recyclerview);
+//            refreshLayout = rootview.findViewById(R.id.refreshLayout);
+//            refreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
+//            refreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
+//            refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
+//            refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
+//            refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+//                @Override
+//                public void onLoadMore(RefreshLayout refreshlayout) {
+//                    Log.d(TAG, "-------onLoadMore---------");
+//                    refreshlayout.finishLoadMore(1000/*,false*/);//传入false表示加载失败
+//                    getMoviewData(++number);
+//                    movieAdapter.notifyDataSetChanged();
+//                }
+//            });
+//            //启用嵌套滚动
+//            recyclerView.setNestedScrollingEnabled(false);
+//            recyclerView.setFocusableInTouchMode(false);
+//            recyclerView.setflingScale(3.0); // 设置速度缩放因子为3.0，使滑动速度变快一倍
+//        }
+//        return rootview;
+//    }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume----------");
+        Log.d(TAG, "onResume-------- number = " + number);
         // 将数据加载逻辑放到onResume()方法中
         if (movieAdapter == null) {
             Log.d(TAG, "onResume-----------getMoviewData");
-            getMoviewData();
+            getMoviewData(number);
         }
     }
 
@@ -108,10 +128,10 @@ public class AiQingPianFragment extends BaseFragment {
     /**
      * 电影数据
      */
-    public void getMoviewData() {
+    public void getMoviewData(int number) {
         Log.d(TAG, "请求数据--------------------getMoviewData");
         Request request = new Request.Builder()
-                .url(API.AIQING)
+                .url(API.AIQING + 12 * number)
                 .build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
