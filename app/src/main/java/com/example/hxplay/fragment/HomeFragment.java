@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends Fragment {
     private ViewPager2 viewPager;
     TabLayout tab_layout;
     String[] title = {"国产剧", "综艺", "日韩动漫", "喜剧片", "爱情片", "纪录片", "欧美剧", "韩剧"};
@@ -39,9 +39,11 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    public void initData() {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         initFragments();
     }
+
 
 
     public void initFragments() {

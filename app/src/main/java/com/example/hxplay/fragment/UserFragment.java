@@ -23,7 +23,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 
-public class UserFragment extends BaseFragment {
+public class UserFragment extends Fragment {
 
     private ImageView ivBg;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -44,9 +44,12 @@ public class UserFragment extends BaseFragment {
         return view;
     }
 
-
-
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+    }
+
     public void initData() {
         //拿到初始图
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.author);
