@@ -356,52 +356,65 @@ public class PlayVideoActivity extends AppCompatActivity {
                     String result = response.body().string();
                     Gson gson = new Gson();
                     VideoDetailsBean movieBean = gson.fromJson(result, VideoDetailsBean.class);
-//                    Log.d(TAG, "movieBean =" +movieBean.getChapterList().size());
-                    // 更新数据源
-                    chapters = movieBean.getData().getChapterList();
-                    // 延迟100ms以确保数据已经赋值
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (chapters != null && chapters.size() >= 1) {
-                                Log.d(TAG, "chapters =" + chapters);
-                                m3u8 = chapters.get(0).getChapterPath();
-                                DramaViewAdapter adapter = new DramaViewAdapter(chapters.size());
-                                mMyview.setAdapter(adapter);
+                    //状态码是否正常
+                    if (movieBean.getCode() == 0) {
+                        // 更新数据源
+                        chapters = movieBean.getData().getChapterList();
+                        // 延迟100ms以确保数据已经赋值
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
 
-                                //todo 导致封面异常
-                                Glide.with(cover).load(movieBean.getData().getCover())
-                                        .fitCenter()
-                                        .centerCrop()
-                                        .into(cover);
-                                title.setText(movieBean.getData().getTitle());
-                                actor.setText(movieBean.getData().getActor());
-                                descs.setText(movieBean.getData().getDescs());
-                                String str = movieBean.getData().getVideoType();
-                                if (str.endsWith(",")) {
-                                    // 如果字符串以逗号结尾，则去掉最后一个逗号
-                                    str = str.substring(0, str.lastIndexOf(","));
-                                }
-                                videotype.setText(str);
-                                region.setText(movieBean.getData().getRegion());
-                                zhuyan.setVisibility(View.VISIBLE);
-                                shuhao.setVisibility(View.VISIBLE);
-                                adapter.getSubViewAdapter().setOnItemClickListener(new SubViewAdapter.OnItemClickListener() {
-                                    @Override
-                                    public void onSubItemClick(View view, int position) {
-                                        Log.d(TAG, "点击位置为" + position);
-                                        if (chapters.size() >= 1) {
-                                            play(chapters.get(position).getChapterPath(), AndroidMedia.class);
-                                        } else {
-                                            Log.d(TAG, "chapters只有一个" + position);
-                                        }
+                                if (chapters != null && chapters.size() >= 1) {
+                                    Log.d(TAG, "chapters =" + chapters);
+                                    m3u8 = chapters.get(0).getChapterPath();
+                                    DramaViewAdapter adapter = new DramaViewAdapter(chapters.size());
+                                    mMyview.setAdapter(adapter);
+
+                                    //todo 导致封面异常
+                                    Glide.with(cover).load(movieBean.getData().getCover())
+                                            .fitCenter()
+                                            .centerCrop()
+                                            .into(cover);
+                                    title.setText(movieBean.getData().getTitle());
+                                    actor.setText(movieBean.getData().getActor());
+                                    descs.setText(movieBean.getData().getDescs());
+                                    String str = movieBean.getData().getVideoType();
+                                    if (str.endsWith(",")) {
+                                        // 如果字符串以逗号结尾，则去掉最后一个逗号
+                                        str = str.substring(0, str.lastIndexOf(","));
                                     }
-                                });
+                                    videotype.setText(str);
+                                    region.setText(movieBean.getData().getRegion());
+                                    zhuyan.setVisibility(View.VISIBLE);
+                                    shuhao.setVisibility(View.VISIBLE);
+                                    adapter.getSubViewAdapter().setOnItemClickListener(new SubViewAdapter.OnItemClickListener() {
+                                        @Override
+                                        public void onSubItemClick(View view, int position) {
+                                            Log.d(TAG, "点击位置为" + position);
+                                            if (chapters.size() >= 1) {
+                                                play(chapters.get(position).getChapterPath(), AndroidMedia.class);
+                                            } else {
+                                                Log.d(TAG, "chapters只有一个" + position);
+                                            }
+                                        }
+                                    });
+                                }
                             }
-                        }
-                    }, 300);
-
+                        }, 300);
+                    } else {
+                        //状态码不正常，toast+返回
+//                        Toast.makeText(getApplicationContext(), "数据获取失败", Toast.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(PlayVideoActivity.this, "数据获取失败，" +
+                                        "返回到上一界面", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        finish();
+                    }
                 }
             }
         });
