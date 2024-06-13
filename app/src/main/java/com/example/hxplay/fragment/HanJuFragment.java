@@ -1,12 +1,9 @@
 package com.example.hxplay.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.hxplay.R;
@@ -36,32 +33,6 @@ public class HanJuFragment extends BaseFragment{
     private List<VideoBean.Movie> movieList;
     private MovieAdapter movieAdapter;
 
-    private Context mContext;
-
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getContext();
-    }
-
-
-//    @Override
-//    public View initView() {
-//        Log.d(TAG, "onCreateView-----");
-//        if (rootview == null) {
-//            Log.d(TAG, "onCreateView--------rootview为null");
-//            rootview = View.inflate(getContext(), R.layout.fragment_main, null);
-//            banner = rootview.findViewById(R.id.banner);
-//            recyclerView = rootview.findViewById(R.id.recyclerview);
-//            //启用嵌套滚动
-//            recyclerView.setNestedScrollingEnabled(false);
-//            recyclerView.setFocusableInTouchMode(false);
-//            recyclerView.setflingScale(3.0); // 设置速度缩放因子为2.0，使滑动速度变快一倍
-//        }
-//        return rootview;
-//    }
 
     @Override
     public void onResume() {

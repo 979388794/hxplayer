@@ -1,12 +1,9 @@
 package com.example.hxplay.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.hxplay.R;
@@ -32,16 +29,6 @@ public class GuoChanFragment extends BaseFragment {
     String TAG = this.getClass().getSimpleName();
     private List<VideoBean.Movie> movieList;
     private MovieAdapter movieAdapter;
-
-
-    private Context mContext;
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getContext();
-    }
 
 
 

@@ -28,14 +28,6 @@ public class HomeFragment extends BaseFragment {
     String[] title = {"国产剧", "综艺", "日韩动漫", "喜剧片", "爱情片", "纪录片", "欧美剧", "韩剧"};
     private ViewPageAdapter newTabAdapter;
 
-//    @Override
-//    public View initView() {
-//        View view = View.inflate(getContext(), R.layout.fragment_home, null);
-//        viewPager = view.findViewById(R.id.view_pager);
-//        tab_layout = view.findViewById(R.id.tab_layout);
-//        return view;
-//    }
-
 
     @Nullable
     @Override

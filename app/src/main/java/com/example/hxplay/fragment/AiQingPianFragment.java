@@ -1,12 +1,9 @@
 package com.example.hxplay.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.hxplay.R;
@@ -37,15 +34,8 @@ public class AiQingPianFragment extends BaseFragment {
     private List<VideoBean.Movie> movieList;
     private MovieAdapter movieAdapter;
 
-    private Context mContext;
     RefreshLayout refreshLayout;
     int number = 1;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getContext();
-    }
 
 
 
