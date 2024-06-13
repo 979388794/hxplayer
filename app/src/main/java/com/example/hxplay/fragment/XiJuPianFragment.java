@@ -9,21 +9,13 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.hxplay.R;
 import com.example.hxplay.activity.PlayVideoActivity;
 import com.example.hxplay.adapter.MovieAdapter;
 import com.example.hxplay.bean.VideoBean;
-import com.example.hxplay.glide.GlideApp;
 import com.example.hxplay.utils.API;
 import com.example.hxplay.view.MyGridLayoutManager;
-import com.example.hxplay.view.MyRecyclerView;
 import com.google.gson.Gson;
-import com.youth.banner.Banner;
-import com.youth.banner.adapter.BannerImageAdapter;
-import com.youth.banner.holder.BannerImageHolder;
-import com.youth.banner.indicator.CircleIndicator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,15 +30,13 @@ import okhttp3.Response;
  * @author: henry.xue
  * @date: 2024-05-24
  */
-public class XiJuPianFragment extends BaseFragment{
+public class XiJuPianFragment extends BaseFragment {
     String TAG = this.getClass().getSimpleName();
     private List<VideoBean.Movie> movieList;
     private MovieAdapter movieAdapter;
 
-    private Banner banner;
     private Context mContext;
-    View rootview;
-    MyRecyclerView recyclerView;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,21 +45,6 @@ public class XiJuPianFragment extends BaseFragment{
     }
 
 
-//    @Override
-//    public View initView() {
-//        Log.d(TAG, "onCreateView-----");
-//        if (rootview == null) {
-//            Log.d(TAG, "onCreateView--------rootview为null");
-//            rootview = View.inflate(getContext(), R.layout.fragment_main, null);
-//            banner = rootview.findViewById(R.id.banner);
-//            recyclerView = rootview.findViewById(R.id.recyclerview);
-//            //启用嵌套滚动
-//            recyclerView.setNestedScrollingEnabled(false);
-//            recyclerView.setFocusableInTouchMode(false);
-//            recyclerView.setflingScale(3.0); // 设置速度缩放因子为2.0，使滑动速度变快一倍
-//        }
-//        return rootview;
-//    }
     @Override
     public void onResume() {
         super.onResume();
@@ -80,23 +55,14 @@ public class XiJuPianFragment extends BaseFragment{
             getMoviewData();
         }
     }
-    public void initBanner() {
+
+    @Override
+    public List<Integer> getImageList() {
         List<Integer> imageList = new ArrayList<>();
         imageList.add(R.drawable.xiju1);
         imageList.add(R.drawable.xiju2);
         imageList.add(R.drawable.xiju3);
-        banner.setAdapter(new BannerImageAdapter<Integer>(imageList) {
-                    @Override
-                    public void onBindView(BannerImageHolder holder, Integer resourceId, int position, int size) {
-                        GlideApp.with(holder.itemView)
-                                .load(resourceId)
-                                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                                .fitCenter()
-                                .centerCrop()
-                                .into(holder.imageView);
-                    }
-                }).addBannerLifecycleObserver(this)//添加生命周期观察者
-                .setIndicator(new CircleIndicator(getActivity()));
+        return imageList;
     }
 
     @Override
@@ -104,8 +70,6 @@ public class XiJuPianFragment extends BaseFragment{
         super.onDestroyView();
         Log.d(TAG, "onDestroyView------");
     }
-
-
 
 
     /**

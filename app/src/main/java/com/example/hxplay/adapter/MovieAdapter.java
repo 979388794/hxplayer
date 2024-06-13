@@ -47,7 +47,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MovieAdapter.MyViewHolder holder, int position) {
         holder.service_name.setText(movieList.get(position).getTitle());
         String url = movieList.get(position).getCover();
-        GlideApp.with(context).load(url).into(holder.service_img);
+        if(context!=null){
+            GlideApp.with(context).load(url).into(holder.service_img);
+        }
     }
 
     // 返回Item总条数

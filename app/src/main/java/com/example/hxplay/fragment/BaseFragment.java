@@ -13,13 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.hxplay.R;
+import com.example.hxplay.glide.GlideApp;
 import com.example.hxplay.utils.SSLHelper;
 import com.example.hxplay.view.MyRecyclerView;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.youth.banner.Banner;
+import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.holder.BannerImageHolder;
+import com.youth.banner.indicator.CircleIndicator;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 
@@ -79,13 +87,17 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
-//    public abstract View initView();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initBanner(getImageList());
+    }
 
+    //    public abstract View initView();
 
     @Override
     public void onStart() {
         super.onStart();
-//        initBanner();
         /**
          * banner已经和fragment生命周期绑定
          */
@@ -95,28 +107,39 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-//        if (banner != null) {
-//            banner.stop();
-//        }
-    }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
-
     }
 
-    public void initBanner() {
+
+    public void initBanner(List<Integer> list) {
+        List<Integer> imageList = list;
+        if (imageList != null && !imageList.isEmpty()) {
+            banner.setAdapter(new BannerImageAdapter<Integer>(imageList) {
+                        @Override
+                        public void onBindView(BannerImageHolder holder, Integer resourceId, int position, int size) {
+                            GlideApp.with(holder.itemView)
+                                    .load(resourceId)
+                                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
+                                    .fitCenter()
+                                    .centerCrop()
+                                    .into(holder.imageView);
+                        }
+                    }).addBannerLifecycleObserver(this)//添加生命周期观察者
+                    .setIndicator(new CircleIndicator(getActivity()));
+        }
     }
 
 
     public void initData() {
 
+    }
+
+    public List<Integer> getImageList() {
+        return null;
     }
 
 

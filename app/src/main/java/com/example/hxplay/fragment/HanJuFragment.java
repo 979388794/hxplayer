@@ -9,21 +9,13 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.hxplay.R;
 import com.example.hxplay.activity.PlayVideoActivity;
 import com.example.hxplay.adapter.MovieAdapter;
 import com.example.hxplay.bean.VideoBean;
-import com.example.hxplay.glide.GlideApp;
 import com.example.hxplay.utils.API;
 import com.example.hxplay.view.MyGridLayoutManager;
-import com.example.hxplay.view.MyRecyclerView;
 import com.google.gson.Gson;
-import com.youth.banner.Banner;
-import com.youth.banner.adapter.BannerImageAdapter;
-import com.youth.banner.holder.BannerImageHolder;
-import com.youth.banner.indicator.CircleIndicator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,10 +36,9 @@ public class HanJuFragment extends BaseFragment{
     private List<VideoBean.Movie> movieList;
     private MovieAdapter movieAdapter;
 
-    private Banner banner;
     private Context mContext;
-    View rootview;
-    MyRecyclerView recyclerView;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,25 +81,13 @@ public class HanJuFragment extends BaseFragment{
         Log.d(TAG, "onDestroyView------");
     }
 
-
-
-    public void initBanner() {
+    @Override
+    public List<Integer> getImageList() {
         List<Integer> imageList = new ArrayList<>();
         imageList.add(R.drawable.hanju1);
         imageList.add(R.drawable.hanju2);
         imageList.add(R.drawable.hanju3);
-        banner.setAdapter(new BannerImageAdapter<Integer>(imageList) {
-                    @Override
-                    public void onBindView(BannerImageHolder holder, Integer resourceId, int position, int size) {
-                        GlideApp.with(holder.itemView)
-                                .load(resourceId)
-                                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                                .fitCenter()
-                                .centerCrop()
-                                .into(holder.imageView);
-                    }
-                }).addBannerLifecycleObserver(this)//添加生命周期观察者
-                .setIndicator(new CircleIndicator(getActivity()));
+        return imageList;
     }
 
 

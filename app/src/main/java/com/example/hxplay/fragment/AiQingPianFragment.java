@@ -9,24 +9,14 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.hxplay.R;
 import com.example.hxplay.activity.PlayVideoActivity;
 import com.example.hxplay.adapter.MovieAdapter;
 import com.example.hxplay.bean.VideoBean;
-import com.example.hxplay.glide.GlideApp;
 import com.example.hxplay.utils.API;
 import com.example.hxplay.view.MyGridLayoutManager;
-import com.example.hxplay.view.MyRecyclerView;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.youth.banner.adapter.BannerImageAdapter;
-import com.youth.banner.holder.BannerImageHolder;
-import com.youth.banner.indicator.CircleIndicator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,8 +38,6 @@ public class AiQingPianFragment extends BaseFragment {
     private MovieAdapter movieAdapter;
 
     private Context mContext;
-    View rootview;
-    MyRecyclerView recyclerView;
     RefreshLayout refreshLayout;
     int number = 1;
 
@@ -59,35 +47,7 @@ public class AiQingPianFragment extends BaseFragment {
         mContext = getContext();
     }
 
-//    @Override
-//    public View initView() {
-//        Log.d(TAG, "onCreateView-----");
-//        if (rootview == null) {
-//            Log.d(TAG, "onCreateView--------rootview为null");
-//            rootview = View.inflate(getContext(), R.layout.fragment_main, null);
-//            banner = rootview.findViewById(R.id.banner);
-//            recyclerView = rootview.findViewById(R.id.recyclerview);
-//            refreshLayout = rootview.findViewById(R.id.refreshLayout);
-//            refreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
-//            refreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
-//            refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
-//            refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
-//            refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-//                @Override
-//                public void onLoadMore(RefreshLayout refreshlayout) {
-//                    Log.d(TAG, "-------onLoadMore---------");
-//                    refreshlayout.finishLoadMore(1000/*,false*/);//传入false表示加载失败
-//                    getMoviewData(++number);
-//                    movieAdapter.notifyDataSetChanged();
-//                }
-//            });
-//            //启用嵌套滚动
-//            recyclerView.setNestedScrollingEnabled(false);
-//            recyclerView.setFocusableInTouchMode(false);
-//            recyclerView.setflingScale(3.0); // 设置速度缩放因子为3.0，使滑动速度变快一倍
-//        }
-//        return rootview;
-//    }
+
 
     @Override
     public void onResume() {
@@ -106,24 +66,18 @@ public class AiQingPianFragment extends BaseFragment {
         Log.d(TAG, "onDestroyView------");
     }
 
-    public void initBanner() {
+
+    @Override
+    public List<Integer> getImageList() {
         List<Integer> imageList = new ArrayList<>();
         imageList.add(R.drawable.aiqing1);
         imageList.add(R.drawable.aiqing2);
         imageList.add(R.drawable.aiqing3);
-        banner.setAdapter(new BannerImageAdapter<Integer>(imageList) {
-                    @Override
-                    public void onBindView(BannerImageHolder holder, Integer resourceId, int position, int size) {
-                        GlideApp.with(holder.itemView)
-                                .load(resourceId)
-                                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                                .fitCenter()
-                                .centerCrop()
-                                .into(holder.imageView);
-                    }
-                }).addBannerLifecycleObserver(this)//添加生命周期观察者
-                .setIndicator(new CircleIndicator(getActivity()));
+        return imageList;
     }
+
+
+
 
     /**
      * 电影数据
