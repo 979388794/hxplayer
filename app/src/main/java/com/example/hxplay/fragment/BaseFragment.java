@@ -118,7 +118,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        Log.d(TAG, "onResume-------- number = " + number);
+        Log.d(TAG, "onResume-------- number = " + number);
         // 将数据加载逻辑放到onResume()方法中
         if (movieAdapter == null) {
             Log.d(TAG, "onResume-----------getMoviewData");
