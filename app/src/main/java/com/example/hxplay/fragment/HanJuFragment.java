@@ -3,8 +3,6 @@ package com.example.hxplay.fragment;
 import android.util.Log;
 
 import com.example.hxplay.R;
-import com.example.hxplay.adapter.MovieAdapter;
-import com.example.hxplay.bean.VideoBean;
 import com.example.hxplay.utils.API;
 
 import java.util.ArrayList;
@@ -17,9 +15,6 @@ import java.util.List;
 public class HanJuFragment extends BaseFragment{
 
     String TAG = this.getClass().getSimpleName();
-    private List<VideoBean.Movie> movieList;
-    private MovieAdapter movieAdapter;
-
 
 
     @Override
