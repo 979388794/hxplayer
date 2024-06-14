@@ -119,6 +119,8 @@ public abstract class BaseFragment extends Fragment {
         if (movieAdapter == null) {
             Log.d(TAG, "onResume-----------getMoviewData");
             getMoviewData(number);
+        }else {
+            recyclerView.setAdapter(movieAdapter);
         }
     }
 

@@ -1,10 +1,12 @@
 package com.example.hxplay.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -23,7 +25,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    private long exitTime = 0;
     private MyFragmentPagerAdapter adapter;
     //未选中的Tab图片
     private int[] unSelectTabRes = new int[]{R.mipmap.main_home, R.mipmap.category, R.mipmap.main_user};
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager viewPager;
     private TabLayout tabLayout;
     DrawerLayout mDrawerLayout;
-
+    String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,5 +177,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return view;
         }
     }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "-------onStop-----");
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "-------onDestroy-----");
+    }
+
+    @Override
+    public void onBackPressed() {
+        // 在这里添加自定义的返回按钮逻辑
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
+    }
+
+
 }
 
