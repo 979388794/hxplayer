@@ -26,7 +26,7 @@ import com.example.hxplay.adapter.DramaViewAdapter;
 import com.example.hxplay.adapter.SubViewAdapter;
 import com.example.hxplay.bean.VideoDetailsBean;
 import com.example.hxplay.utils.API;
-import com.example.hxplay.utils.SSLHelper;
+import com.example.hxplay.utils.okHttpUtil;
 import com.example.hxplay.video.danmaku.DanmakuConfig;
 import com.example.hxplay.video.danmaku.DanmakuControl;
 import com.example.hxplay.video.danmaku.QSDanmakuParser;
@@ -50,7 +50,6 @@ import java.util.List;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -64,7 +63,7 @@ public class PlayVideoActivity extends AppCompatActivity {
     String url;
     Class<? extends BaseMedia> decodeMedia;
     String videoId;
-    public OkHttpClient client;
+
     List<VideoDetailsBean.Data.Chapter> chapters;
 
     ImageView cover;
@@ -80,9 +79,6 @@ public class PlayVideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_view);
-        OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-        SSLHelper.configureSSL(okBuilder);
-        client = okBuilder.build();
         videoId = getIntent().getStringExtra("videoId");
 
         Log.d(TAG, "videoId-----=" + videoId.toString());
@@ -343,7 +339,7 @@ public class PlayVideoActivity extends AppCompatActivity {
         Request request = new Request.Builder()
                 .url(API.VideoDetails + videoId)
                 .build();
-        Call call = client.newCall(request);
+        Call call = okHttpUtil.getInstance().getOkHttpClient().newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

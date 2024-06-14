@@ -22,7 +22,7 @@ import com.example.hxplay.activity.PlayVideoActivity;
 import com.example.hxplay.adapter.MovieAdapter;
 import com.example.hxplay.bean.VideoBean;
 import com.example.hxplay.glide.GlideApp;
-import com.example.hxplay.utils.SSLHelper;
+import com.example.hxplay.utils.okHttpUtil;
 import com.example.hxplay.view.MyGridLayoutManager;
 import com.example.hxplay.view.MyRecyclerView;
 import com.google.gson.Gson;
@@ -39,14 +39,13 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 
 public abstract class BaseFragment extends Fragment {
     private Context mContext;
-    public OkHttpClient client;
+
     View rootview;
     Banner banner;
     Handler handler;
@@ -61,9 +60,6 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getContext();
-        OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-        SSLHelper.configureSSL(okBuilder);
-        client = okBuilder.build();
         handler = new Handler(Looper.getMainLooper());
     }
 
@@ -155,7 +151,8 @@ public abstract class BaseFragment extends Fragment {
         Request request = new Request.Builder()
                 .url(getMovieUrl() + 12 * number)
                 .build();
-        Call call = client.newCall(request);
+        Call call = okHttpUtil.getInstance().getOkHttpClient().
+                newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
