@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -45,7 +46,6 @@ public class HomeFragment extends Fragment {
     }
 
 
-
     public void initFragments() {
         List<Fragment> fragmentlist = new ArrayList<>();
         fragmentlist.add(new GuoChanFragment());
@@ -64,12 +64,61 @@ public class HomeFragment extends Fragment {
         new TabLayoutMediator(tab_layout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-
-                tab.setText(title[position]);
+                tab.setCustomView(getViewAtI(position));
             }
         }).attach();
-        tab_layout.setTabTextColors(getResources().getColor(R.color.tab_text_unselected),
-                getResources().getColor(R.color.tab_text_selected));
+        // 手动选中第一个Tab
+        tab_layout.getTabAt(0).select();
+        // 为第一个Tab设置选中时的样式
+        TabLayout.Tab firstTab = tab_layout.getTabAt(0);
+        if (firstTab != null) {
+            // 获取第一个Tab对应的CustomView
+            View firstTabView = firstTab.getCustomView();
+            if (firstTabView != null) {
+                TextView firstTabTitle = firstTabView.findViewById(R.id.tv_title);
+                firstTabTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.tab_text_selected));
+                firstTabTitle.setTextSize(20);
+            }
+        }
+        tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                // Tab 被选中
+                int position = tab.getPosition();
+                View customView = tab.getCustomView();
+                if (customView != null) {
+                    TextView title = customView.findViewById(R.id.tv_title);
+                    title.setTextColor(ContextCompat.getColor(getContext(), R.color.tab_text_selected));
+                    title.setTextSize(20);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // Tab 取消选中
+                int position = tab.getPosition();
+                View customView = tab.getCustomView();
+                if (customView != null) {
+                    TextView title = customView.findViewById(R.id.tv_title);
+                    title.setTextColor(ContextCompat.getColor(getContext(), R.color.tab_text_unselected));
+                    title.setTextSize(16);
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // Tab 被重新选中（点击已选中的 Tab）
+            }
+        });
+
+    }
+
+    private View getViewAtI(int position) {
+        View view = getLayoutInflater().inflate(R.layout.tab_text, null, false);
+        TextView textView = view.findViewById(R.id.tv_title);
+        // 这个icons就是一个简单的图片保存的数组，保存如R.drawable.touxiang
+        textView.setText(title[position]);
+        return view;
     }
 
 
