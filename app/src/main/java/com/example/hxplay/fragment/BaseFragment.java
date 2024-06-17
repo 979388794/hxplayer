@@ -68,7 +68,7 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        Log.d(TAG, "onCreateView-----");
+            Log.d(TAG, "onCreateView-----");
         if (rootview == null) {
             Log.d(TAG, "onCreateView--------rootview为null");
             rootview = View.inflate(getContext(), R.layout.fragment_main, null);
@@ -119,7 +119,7 @@ public abstract class BaseFragment extends Fragment {
         if (movieAdapter == null) {
             Log.d(TAG, "onResume-----------getMoviewData");
             getMoviewData(number);
-        }else {
+        } else {
             recyclerView.setAdapter(movieAdapter);
         }
     }
